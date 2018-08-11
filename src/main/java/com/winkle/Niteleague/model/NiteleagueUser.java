@@ -1,6 +1,7 @@
 package com.winkle.Niteleague.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -33,10 +34,11 @@ public class NiteleagueUser {
     @CreatedDate
     private Date createdAt;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
+    @UpdateTimestamp
     private Date updatedAt;
+
     public Long getId() {
         return id;
     }
