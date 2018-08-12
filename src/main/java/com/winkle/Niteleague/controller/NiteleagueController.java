@@ -3,7 +3,6 @@ package com.winkle.Niteleague.controller;
 
 import com.winkle.Niteleague.exception.ResourceNotFoundException;
 import com.winkle.Niteleague.model.NiteleagueUser;
-import com.winkle.Niteleague.model.Note;
 import com.winkle.Niteleague.repository.NiteleagueUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

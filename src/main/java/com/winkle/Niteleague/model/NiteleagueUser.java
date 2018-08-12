@@ -5,9 +5,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.text.DateFormat;
 import java.util.Date;
 
 /**
@@ -29,6 +31,18 @@ public class NiteleagueUser {
     @NotBlank
     private String username;
 
+    @Column(name = "DOB")
+    private String DOB;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column
+    private String emailAddress;
+
+    @Column(name = "avatar")
+    private String avatar;
+
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
@@ -38,6 +52,39 @@ public class NiteleagueUser {
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     private Date updatedAt;
+
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public String getDOB() {
+        return DOB;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setDOB(String DOB) {
+        this.DOB = DOB;
+    }
 
     public Long getId() {
         return id;
