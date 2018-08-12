@@ -9,7 +9,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -32,17 +34,15 @@ public class User {
     @NotBlank
     private String username;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private SocialMedia socialMedia;
-
-
     @Column(name = "DOB")
     private String DOB;
 
     @Column(name = "password")
     private String password;
 
-    @Column
+    @Column(name = "email", nullable = false, unique = true)
+    @Email(message = "Please provide a valid e-mail")
+    @NotEmpty(message = "Please provide an e-mail")
     private String emailAddress;
 
     @Column(name = "avatar")
@@ -57,11 +57,24 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     private Date updatedAt;
+    private String twitter;
+
+    private String facebook;
+
+    private String epicGames;
+
+    private String PSN;
+
+    private String xbox;
+
+    private String youtube;
+
+    private String instagram;
 
     public User() {
     }
 
-    public User(@NotBlank String name, @NotBlank String username, String DOB, String password, String emailAddress, String avatar, Date createdAt, Date updatedAt) {
+    public User(@NotBlank String name, @NotBlank String username, String DOB, String password, @Email(message = "Please provide a valid e-mail") @NotEmpty(message = "Please provide an e-mail") String emailAddress, String avatar, Date createdAt, Date updatedAt, String twitter, String facebook, String epicGames, String PSN, String xbox, String youtube, String instagram, String stream) {
         this.name = name;
         this.username = username;
         this.DOB = DOB;
@@ -70,7 +83,82 @@ public class User {
         this.avatar = avatar;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.twitter = twitter;
+        this.facebook = facebook;
+        this.epicGames = epicGames;
+        this.PSN = PSN;
+        this.xbox = xbox;
+        this.youtube = youtube;
+        this.instagram = instagram;
+        this.stream = stream;
     }
+
+    public String getTwitter() {
+        return twitter;
+    }
+
+    public void setTwitter(String twitter) {
+        this.twitter = twitter;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    public String getEpicGames() {
+        return epicGames;
+    }
+
+    public void setEpicGames(String epicGames) {
+        this.epicGames = epicGames;
+    }
+
+    public String getPSN() {
+        return PSN;
+    }
+
+    public void setPSN(String PSN) {
+        this.PSN = PSN;
+    }
+
+    public String getXbox() {
+        return xbox;
+    }
+
+    public void setXbox(String xbox) {
+        this.xbox = xbox;
+    }
+
+    public String getYoutube() {
+        return youtube;
+    }
+
+    public void setYoutube(String youtube) {
+        this.youtube = youtube;
+    }
+
+    public String getInstagram() {
+        return instagram;
+    }
+
+    public void setInstagram(String instagram) {
+        this.instagram = instagram;
+    }
+
+    public String getStream() {
+        return stream;
+    }
+
+    public void setStream(String stream) {
+        this.stream = stream;
+    }
+
+    private String stream;
+
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
