@@ -17,8 +17,13 @@ import java.util.List;
 @RequestMapping("/api")
 public class NoteController {
 
-    @Autowired
+    private final
     NoteRepository noteRepository;
+
+    @Autowired
+    public NoteController(NoteRepository noteRepository) {
+        this.noteRepository = noteRepository;
+    }
 
     @GetMapping("/notes")
     public List<Note> getAllNotes() {

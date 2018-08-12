@@ -1,17 +1,11 @@
 package com.winkle.Niteleague.controller;
 
 
-import com.winkle.Niteleague.exception.ResourceNotFoundException;
-import com.winkle.Niteleague.model.NiteleagueUser;
-import com.winkle.Niteleague.repository.NiteleagueUserRepository;
+import com.winkle.Niteleague.model.User;
+import com.winkle.Niteleague.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.winkle.Niteleague.model.Note;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import javax.validation.Valid;
 
 @CrossOrigin
 @RestController
@@ -19,10 +13,7 @@ import javax.validation.Valid;
 public class RegistrationController {
 
     @Autowired
-    NiteleagueUserRepository niteleagueUserRepository;
+    UserRepository userRepository;
 
-    @PostMapping("/register")
-    public NiteleagueUser createUser(NiteleagueUser user) {
-        return niteleagueUserRepository.save(user);
-    }
+
 }
