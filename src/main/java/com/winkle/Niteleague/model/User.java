@@ -1,6 +1,7 @@
 package com.winkle.Niteleague.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -28,8 +29,12 @@ public class User {
     @NotBlank
     private String name;
 
-    @Column(unique = true)
+    @NotBlank
     private String username;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private SocialMedia socialMedia;
+
 
     @Column(name = "DOB")
     private String DOB;
@@ -53,6 +58,19 @@ public class User {
     @UpdateTimestamp
     private Date updatedAt;
 
+    public User() {
+    }
+
+    public User(@NotBlank String name, @NotBlank String username, String DOB, String password, String emailAddress, String avatar, Date createdAt, Date updatedAt) {
+        this.name = name;
+        this.username = username;
+        this.DOB = DOB;
+        this.password = password;
+        this.emailAddress = emailAddress;
+        this.avatar = avatar;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
