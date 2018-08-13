@@ -14,16 +14,18 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by rajeevkumarsingh on 27/06/17.
  */
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
         allowGetters = true)
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,7 +33,7 @@ public class User {
     @NotBlank
     private String name;
 
-    @NotBlank
+
     private String username;
 
     @Column(name = "DOB")

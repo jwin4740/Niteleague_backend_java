@@ -1,5 +1,5 @@
-insert into NiteleagueUser
+insert into niteleague_db.users
 values(1, 'Dale', 'zarnerz');
 
-insert into NiteleagueUser
+insert into niteleague_db.users
 values(2, 'James', 'jwin4740');
