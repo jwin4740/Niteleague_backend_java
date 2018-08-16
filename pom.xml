@@ -33,12 +33,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.databene/databene-benerator -->
-		<dependency>
-			<groupId>org.databene</groupId>
-			<artifactId>databene-benerator</artifactId>
-			<version>0.9.8</version>
-		</dependency>
+
 
 
 		<dependency>
@@ -63,6 +58,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.databene</groupId>
+				<artifactId>maven-benerator-plugin</artifactId>
+				<version>0.7.6</version>
 			</plugin>
 		</plugins>
 	</build>
