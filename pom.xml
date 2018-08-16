@@ -33,6 +33,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.databene/databene-benerator -->
+		<dependency>
+			<groupId>org.databene</groupId>
+			<artifactId>databene-benerator</artifactId>
+			<version>0.9.8</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
