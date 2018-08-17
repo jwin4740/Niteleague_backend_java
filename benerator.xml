@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<setup xmlns="http://databene.org/benerator/0.7.6"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://databene.org/benerator/0.7.6
- http://databene.org/benerator-0.7.6.xsd">
-    <generate type="users" count="10" consumer="ConsoleExporter"/>
-    <iterate type="Person" source="persons.csv" />
-</setup>
