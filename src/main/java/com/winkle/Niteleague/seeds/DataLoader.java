@@ -1,5 +1,4 @@
 package com.winkle.Niteleague.seeds;
-
 import com.winkle.Niteleague.model.Team;
 import com.winkle.Niteleague.model.User;
 import com.winkle.Niteleague.repository.TeamMemberRepository;
@@ -31,7 +30,7 @@ import java.util.*;
 
 @Component
 @Service
-public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
+public class DataLoader  implements ApplicationListener<ContextRefreshedEvent> {
     private TeamRepository teamRepository;
     private UserRepository userRepository;
     private TeamMemberRepository teamMemberRepository;
@@ -116,9 +115,15 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
             user.setStream(makeSTREAM(tempUsername));
             user.setUsername(tempUsername);
             user.setXbox(makeXBOX(tempUsername));
+            user.setYoutube(makeYOUTUBE(tempUsername));
             user.setName(l.get(i));
             user.setPassword(randomPassword());
+            user.setFacebook(makeFacebook(tempUsername));
             userRepository.save(user);
+            if (i%4 == 0) {
+                entityManager.flush();
+                entityManager.clear();
+            }
 
 
         }
@@ -133,7 +138,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
 
 
-    public static String randomPassword() {
+    private static String randomPassword() {
         Random r = new Random();
         StringBuilder passwd = new StringBuilder();
         for (int i = 0; i < 20; i++) {
