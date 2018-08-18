@@ -1,6 +1,7 @@
 package com.winkle.Niteleague.bootstrap;
 
 import com.winkle.Niteleague.model.Team;
+import com.winkle.Niteleague.repository.TeamMemberRepository;
 import com.winkle.Niteleague.repository.TeamRepository;
 import com.winkle.Niteleague.repository.UserRepository;
 import org.apache.logging.log4j.LogManager;
@@ -14,20 +15,43 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 @Component
-public class TeamLoader implements ApplicationListener<ContextRefreshedEvent> {
+public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     private TeamRepository teamRepository;
     private UserRepository userRepository;
+    private TeamMemberRepository teamMemberRepository;
     private Logger log = LogManager.getLogger();
+
     @Autowired
     public void setTeamRepository(TeamRepository teamRepository) {
         this.teamRepository = teamRepository;
     }
+
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        // The name of the file to open.
-        String fileName = "teams.txt";
+        insertTeams();
+
+    }
+
+    public static String randomPassword() {
+        Random r = new Random();
+        StringBuilder passwd = new StringBuilder();
+        for (int i = 0; i < 20; i++) {
+            int rand = r.nextInt(26) + 97;
+            passwd.append(Character.toString((char) rand));
+        }
+        return passwd.toString();
+    }
+
+    private void insertTeams() {
+        String fileName = "src/test/txtfiles/teams.txt";
         ArrayList<String> k = setProps(fileName);
         for (String i : k) {
             Team team = new Team();
@@ -37,6 +61,7 @@ public class TeamLoader implements ApplicationListener<ContextRefreshedEvent> {
 
             log.info("Saved team");
         }
+
     }
 
     private ArrayList<String> setProps(String fileName) {
