@@ -7,21 +7,43 @@ import com.winkle.Niteleague.repository.TeamRepository;
 import com.winkle.Niteleague.repository.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.*;
+import org.hibernate.boot.spi.SessionFactoryOptions;
+import org.hibernate.engine.spi.FilterDefinition;
+import org.hibernate.metadata.ClassMetadata;
+import org.hibernate.metadata.CollectionMetadata;
+import org.hibernate.stat.Statistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import javax.naming.NamingException;
+import javax.naming.Reference;
+import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.transaction.Transaction;
 import java.io.*;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Component
+@Service
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     private TeamRepository teamRepository;
     private UserRepository userRepository;
     private TeamMemberRepository teamMemberRepository;
     private Logger log = LogManager.getLogger();
+    private SessionFactory hibernateFactory;
+    private EntityManagerFactory emf;
+
+    @Autowired
+    public void setEntityManagerFactory(EntityManagerFactory emf) {
+
+        this.emf = emf;
+    }
 
     @Autowired
     public void setTeamRepository(TeamRepository teamRepository) {
@@ -35,12 +57,14 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-//        insertTeams();
+        insertTeams();
         insertUsers();
 
     }
 
     private void insertTeams() {
+        EntityManager entityManager = emf.createEntityManager();
+        entityManager.getTransaction().begin();
         String fileName = "src/test/txtfiles/teams.txt";
         ArrayList<String> k = setProps(fileName);
         for (String i : k) {
@@ -49,12 +73,16 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
             team.setAvatar(i + ".png");
             teamRepository.save(team);
 
-            log.info("Saved team");
+
         }
+        entityManager.getTransaction().commit();
+        entityManager.close();
 
     }
 
     private void insertUsers(){
+        EntityManager entityManager = emf.createEntityManager();
+        entityManager.getTransaction().begin();
         String fileName1 = "src/test/txtfiles/usernames.txt";
         String fileName2 = "src/test/txtfiles/names.txt";
         ArrayList<String> k = setProps(fileName1);
@@ -91,9 +119,11 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
             user.setName(l.get(i));
             user.setPassword(randomPassword());
             userRepository.save(user);
-            log.info("Saved user");
+
 
         }
+        entityManager.getTransaction().commit();
+        entityManager.close();
 
 
     }
