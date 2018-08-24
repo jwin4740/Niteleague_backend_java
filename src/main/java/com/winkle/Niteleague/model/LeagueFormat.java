@@ -30,7 +30,7 @@ public class LeagueFormat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long league_format_id;
 
     @NotBlank
     private int numberOfTeams;
@@ -64,11 +64,11 @@ public class LeagueFormat {
     private League league;
 
     public Long getId() {
-        return id;
+        return league_format_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long league_format_id) {
+        this.league_format_id = league_format_id;
     }
 
     public int getNumberOfTeams() {

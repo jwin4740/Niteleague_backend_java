@@ -34,9 +34,9 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @GetMapping("/users/{username}")
-    public User getUserByUsername(@Param("username") @PathVariable String username) {
-        return userRepository.findByUsername(username);
+    @GetMapping("/users/{id}")
+    public User getUserByUsername(@Param("id") @PathVariable long id) {
+        return userRepository.findByUserId(id);
     }
 
     @PostMapping("/register")
@@ -44,10 +44,10 @@ public class UserController {
         return userRepository.save(user);
     }
 
-    @PutMapping("/users/{username}")
-    public User updateUser(String username, User userDetails) {
+    @PutMapping("/users/{id}")
+    public User updateUser(@Param("id") @PathVariable long id, User userDetails) {
 
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByUserId(id);
 
         user.setUsername(userDetails.getUsername());
         user.setTwitter(userDetails.getTwitter());

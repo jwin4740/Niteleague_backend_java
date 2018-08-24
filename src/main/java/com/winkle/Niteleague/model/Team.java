@@ -20,7 +20,7 @@ public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long team_id;
 
     @NotBlank
     private String teamName;
@@ -39,11 +39,11 @@ public class Team {
     private Date updatedAt;
 
     public Long getId() {
-        return id;
+        return team_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long team_id) {
+        this.team_id = team_id;
     }
 
     public String getTeamName() {

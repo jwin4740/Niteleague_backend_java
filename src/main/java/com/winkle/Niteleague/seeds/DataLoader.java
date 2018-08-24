@@ -120,7 +120,7 @@ public class DataLoader  implements ApplicationListener<ContextRefreshedEvent> {
             user.setPassword(randomPassword());
             user.setFacebook(makeFacebook(tempUsername));
             userRepository.save(user);
-            if (i%4 == 0) {
+            if (i%24 == 0) {
                 entityManager.flush();
                 entityManager.clear();
             }

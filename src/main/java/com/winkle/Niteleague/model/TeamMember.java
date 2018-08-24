@@ -20,7 +20,7 @@ public class TeamMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long team_member_id;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -72,11 +72,11 @@ public class TeamMember {
     }
 
     public Long getId() {
-        return id;
+        return team_member_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long team_member_id) {
+        this.team_member_id = team_member_id;
     }
 
     public Team getTeam() {

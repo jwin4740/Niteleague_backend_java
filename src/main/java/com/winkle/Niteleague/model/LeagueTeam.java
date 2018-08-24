@@ -20,7 +20,7 @@ public class LeagueTeam {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long league_team_id;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -66,11 +66,11 @@ public class LeagueTeam {
     }
 
     public Long getId() {
-        return id;
+        return league_team_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long league_team_id) {
+        this.league_team_id = league_team_id;
     }
 
     public League getLeague() {
